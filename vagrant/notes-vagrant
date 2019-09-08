@@ -1,0 +1,50 @@
+# PODSTAWOWE KOMENDY
+
+vagrant init `box name` - utworzenie środowiska z odpowiedniego boxu z repozytorium
+        up              - podnosi środowisko do działania
+	suspend         - zawiesza środowisko i zapisuje stan VM
+	resume          - przywraca środowisko do pracy po zawieszeniu za pomocą suspend
+	ssh		- łączymy się do VM
+	destroy         - niszczy środowisko
+	reload		- przeładowuje środowisko na przykład po zmianach w Vagrantfile	
+
+# PODSTAWOWY OPIS Vagrantfile
+
+config.vm.box = "ubuntu/trusty64"
+
+config.vm.provider "virtualbox" do |vb|
+   vb.memory = 2048	# możemy podać ile pamięci [mb] przydzielić dla VM
+   vb.cpus = 4		# 		   rdzeni cpu przydzielić dla VM
+end
+
+
+# Jeśli dodamy (odkomentujemy) taką linijkę to będziemy mogli (forward) dobrać się do naszej VM przez localhost na porcie :8080
+config.vm.network "forwarded_port", guest: 80, host: 8080
+
+# Możemy skonfigurować dostęp prywatny tylko z naszej lokalnej maszyny - będzie można wejść do serwera przez ten IP
+config.vm.network "private_network", ip: "192.168.33.10"
+
+# Do takiego adresu IP jak powyżej warto skonfigurować sobie wpis w /etc/hosts 
+# (do jednego adresu IP możemy przypisać po spacji wiele różnych domen)
+
+
+# Synced directory
+
+# Tą linijką konfiguracji możemy sobie współdzielić katalog między naszą fizyczną maszyną, a vagrantową VM
+# Pierwszy string określa ścieszkę na maszynie fizycznej, a drugi string ścieżkę VM
+# (Kropka oznacza katalog, w którym znajduje się `Vagrantfile`)
+config.vm.synced_folder ".", "/var/www/"
+
+
+# Provision Settings to potężna część konfiguracji Vagranta
+# To tutaj możemy określić deklaratywnie jakie komendy, jakie pakiety ma zainstalować nowa instancja VM
+
+# inline
+config.vm.provision "shell", inline: <<-SHELL
+   apt-get update
+   apt-get install -y nginx
+SHELL
+
+
+# form .sh file
+config.vm.provision "shell", path: "bootstrap.sh"
