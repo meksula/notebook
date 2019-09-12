@@ -48,3 +48,13 @@ SHELL
 
 # form .sh file
 config.vm.provision "shell", path: "bootstrap.sh"
+
+
+
+# Kiedy mamy już uruchomioną VM i możemy się połączyć do niej za pomocą SSH, żeby przesłać pliki do VM, najlepiej użyć pluginu:
+# vagrant plugin install vagrant-scp (polecenie instalacji)
+# Następnie używamy komendy:
+# vagrant scp <plik, który chcemy wysłać> :<katalog docelowy na VM><nazwa pliku>
+# np. (jesteśmy w katalogu z Vagrantfile)
+# W tym katalogu znajduje się też plik, który chcemy przesłać na VM np. application.jar
+# (polecenie) vagrant scp application.jar :/opt/app/application.jar
