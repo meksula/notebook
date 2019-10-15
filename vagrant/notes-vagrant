@@ -58,3 +58,19 @@ config.vm.provision "shell", path: "bootstrap.sh"
 # np. (jesteśmy w katalogu z Vagrantfile)
 # W tym katalogu znajduje się też plik, który chcemy przesłać na VM np. application.jar
 # (polecenie) vagrant scp application.jar :/opt/app/application.jar
+
+
+# Możemy też za pomocą jednego pliku `Vagrant` utworzyć wiele różnych instancji VM.
+Vagrant.configure(2) do |config|
+   config.vm.box = "centos/7"
+   
+   config.vm.define "instance_1" do |instance_1|
+      instance_1.vm.hostname = "instance_1"
+      instance_1.vm.network "private_network", ip: "10.2.3.5"
+   end
+   
+   config.vm.define "instance_2" do |instance_2|
+      instance_2.vm.hostname = "instance_2"
+      instance_2.vm.network "private_network", ip: "10.2.3.6"
+   end
+end
