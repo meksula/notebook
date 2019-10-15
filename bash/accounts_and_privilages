@@ -1,0 +1,20 @@
+-rw-r--r-- vagrant vagrant 
+# W powyższym przedstawieniu uprawnień mamy 10 pozycji.
+# Pierwszy znak pomijamy
+# Pierwsze 3 pozycje określają prawa dla przypisanego użytkownika
+# Kolejne 3 pozycje określają prawa grupy użytkowników
+# Ostatnie 3 pozycje definiują prawa dla wszystkich pozostałych użytkowników
+# Po uprawnieniach pierwsza nazwa określa nazwę użytkownika, a druga nazwę grupy użytkowników
+#
+# Każde uprawnienie to cyfra:
+# 4 = r
+# 2 = w
+# 1 = x
+#
+# Suma wszystkich uprawnień daje 7, stąd jeśli chcemy przyznać wszystkie uprawnienia wszystkim:
+# $chmod 777 <file_name> 
+#
+# Czyli w taki powyższy sposób dajemy na plik wszystkie możliwe uprawnienia dla każdego.
+# Pierwsza cyfra odpowiada za uprawnienia użytkownika, do którego jest plik,
+# Druga cyfra odpowiada za grupę użytkownika
+# Trzecia cyfra odpowiada za wszystkich pozostałych
