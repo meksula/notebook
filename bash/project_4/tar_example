@@ -1,0 +1,21 @@
+# Mozemy uzywac programu tar do archiwizacji plikow w systemie
+
+# Ta komenda utworzy archiwum z podanego katalogu
+tar -cf oldfiles.tar ~/Dokumenty
+
+# Dzieki opcjom 'tf', mozemy wylistowac cala zawartosc archiwum
+tar -tf oldfiles.tar
+
+# W celu rozpakowania archiwum mozemy uzyc
+tar -xvf oldfiles.tar
+
+# Spakowany plik tar nie jest zoptymalizowany, mozemy go jeszcze skompresowac!
+# Sluzy to tego narzedzie `gzip`
+gzip oldfiles.tar
+
+# Analogicznie, dekompresja:
+gunzip oldfiles.tar.gz
+
+# Rozszerzenia .tar.gz == .tgz
+
+
