@@ -1,0 +1,51 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/buster64"
+
+  config.vm.define "master" do |master|
+    master.vm.hostname = "master"
+    master.vm.network "private_network", ip: "192.168.33.1"
+    master.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+  
+  config.vm.define "instance_01" do |instance_01|
+    instance_01.vm.hostname = "instance_01"
+    instance_01.vm.network "private_network", ip: "192.168.33.2"
+    instance_01.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "instance_02" do |instance_02|
+    instance_02.vm.hostname = "instance_02"
+    instance_02.vm.network "private_network", ip: "192.168.33.3"
+    instance_02.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "instance_03" do |instance_03|
+    instance_03.vm.hostname = "instance_03"
+    instance_03.vm.network "private_network", ip: "192.168.33.4"
+    instance_03.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "instance_04" do |instance_04|
+    instance_04.vm.hostname = "instance_04"
+    instance_04.vm.network "private_network", ip: "192.168.33.5"
+    instance_04.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "instance_05" do |instance_05|
+    instance_05.vm.hostname = "instance_05"
+    instance_05.vm.network "private_network", ip: "192.168.33.6"
+    instance_05.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
+end
