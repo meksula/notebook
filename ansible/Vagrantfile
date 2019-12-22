@@ -3,48 +3,48 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "master" do |master|
     master.vm.hostname = "master"
-    master.vm.network "private_network", ip: "192.168.33.1"
+    master.vm.network "private_network", ip: "192.168.34.1"
     master.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "1024" 
     end
   end
-  
-  config.vm.define "instance_01" do |instance_01|
-    instance_01.vm.hostname = "instance_01"
-    instance_01.vm.network "private_network", ip: "192.168.33.2"
-    instance_01.vm.provider "virtualbox" do |vb|
+
+  config.vm.define "host01" do |host01|
+    host01.vm.hostname = "host01"
+    host01.vm.network "private_network", ip: "192.168.34.2"
+    host01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
 
-  config.vm.define "instance_02" do |instance_02|
-    instance_02.vm.hostname = "instance_02"
-    instance_02.vm.network "private_network", ip: "192.168.33.3"
-    instance_02.vm.provider "virtualbox" do |vb|
+  config.vm.define "host02" do |host02|
+    host02.vm.hostname = "host02"
+    host02.vm.network "private_network", ip: "192.168.34.3"
+    host02.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
 
-  config.vm.define "instance_03" do |instance_03|
-    instance_03.vm.hostname = "instance_03"
-    instance_03.vm.network "private_network", ip: "192.168.33.4"
-    instance_03.vm.provider "virtualbox" do |vb|
+  config.vm.define "host03" do |host03|
+    host03.vm.hostname = "host03"
+    host03.vm.network "private_network", ip: "192.168.34.4"
+    host03.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
 
-  config.vm.define "instance_04" do |instance_04|
-    instance_04.vm.hostname = "instance_04"
-    instance_04.vm.network "private_network", ip: "192.168.33.5"
-    instance_04.vm.provider "virtualbox" do |vb|
+  config.vm.define "host04" do |host04|
+    host04.vm.hostname = "host04"
+    host04.vm.network "private_network", ip: "192.168.34.5"
+    host04.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
 
-  config.vm.define "instance_05" do |instance_05|
-    instance_05.vm.hostname = "instance_05"
-    instance_05.vm.network "private_network", ip: "192.168.33.6"
-    instance_05.vm.provider "virtualbox" do |vb|
+  config.vm.define "host05" do |host05|
+    host05.vm.hostname = "host05"
+    host05.vm.network "private_network", ip: "192.168.34.6"
+    host05.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
