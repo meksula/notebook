@@ -1,0 +1,30 @@
+- name: TLS configuration for group webservers
+  hosts: webservers 
+  become: True
+  vars:                                                # deklaracja zmiennych, na potrzeby dalszego kodu 
+    key_file: /etc/nginx/ssl/nginx.key
+    cert_file: /etc/nginx/ssl/nginx.crt 
+    conf_file: /etc/nginx/sites-available/default 
+    server_name: easeci
+  tasks:
+    - name: Nginx installation
+      apt: name=nginx update_cache=yes cache_valid_time=3600
+    - name: Directories for certs creation
+      file: path=/etc/nginx/ssl state=directory
+    - name: TLS key coping 
+      copy: src=files/nginx.key dest={{ key_file }} owner=root mode=0600
+      notify: restart-nginx
+    - name: TLS cert coping
+      copy: src=files/nginx.crt dest={{ cert_file }}
+      notify: restart-nginx
+    - name: nginx config file coping
+      template: src=templates/nginx.conf.j2 dest={{ conf_file }}
+      notify: restart-nginx
+    - name: nginx configuration
+      file: dest=/etc/nginx/sites-enabled/default src={{ conf_file }} state=link
+      notify: restart-nginx
+    - name: index.html coping to server
+      template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644 
+  handlers:                                             # tak zwana procedura, jest wywoływana w module 'notify' jak metoda
+    - name: restart-nginx                               # Według dokumentacji, uzywa sie porcedur tylko do restartu usług
+      service: name=nginx state=restarted

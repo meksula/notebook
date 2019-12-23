@@ -1,0 +1,17 @@
+- name: nginx configuration for group webservers
+  hosts: webservers                             # definicja grupy hostów, na których wykona się playbook
+  become: True
+  tasks:                                        # tasks to poprostu lista słowników
+    - name: nginx installation                  # nazwa zadania
+      apt: name=nginx update_cache=yes          # nazwa modułu (apt) i odpowiednie parametry, które możemy sprawdzać w dokumentacji modułu
+    - name: nginx configuration file coping
+      copy: src=files/nginx.conf dest=/etc/nginx/sites-available/default
+    - name: Configuration
+      file: >                                   # > to znak dzielenia linii, umożliwia on wstawianie jednej długiej komendy w kilku liniach, interpretowanej jako jedna
+        dest=/etc/nginx/sites-enabled/default 
+        src=/etc/nginx/sites-available/default 
+        state=link
+    - name: Copying default mocked index.html
+      template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html mode=0644
+    - name: nginx service restart
+      service: name=nginx state=restarted

@@ -1,0 +1,22 @@
+Tutaj będą zamieszczone ogólne notatki na temat Ansible.
+
+Wykonanie polecenia sprawdzenia połączenia na serwerze
+$ ansible <nazwa hosta w pliku hosts.yml> -m ping
+
+Można wykonać komendę na zdalnej maszynie po podaniu flagi -a
+$ ansible <nazwa hosta w pliku hosts.yml> -a <komenda wykonana na serwerze>
+$ ansible jenkins -a "ps aux"
+
+Flagę -b używamy, jak potrzebujemy uprawnień sudo
+
+W folderze 'playbooks/files' umieszczamy pliki potrzebne do wykonania playbooka
+W folderze 'playbooks/templates' umieszczamy jakieś templatki jinja
+
+Jak już mamy dodany playbook, możemy go uruchomić:
+$ ansible-playbook <nazwa>
+
+Fajna możliwość to dodanie shebanga na początku playbooka, co pozwala na uruchomienie pliku yml
+#!/usr/bin/env ansible-playbook
+
+Pamiętaj, że interpolacja stringów, albo podstawianie zmiennej odbywa się jak w Angularze
+Zmienne zdefiniowane w sekcji 'vars' możemy rozwiązać za pomocą {{ nazwa_zmiennej }}
