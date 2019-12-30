@@ -15,3 +15,17 @@ registry       ansible_host=51.91.100.185  ansible_port=22
 easeci-core    ansible_host=51.254.33.28   ansible_port=22
 easeci-client  ansible_host=164.132.55.26  ansible_port=22
 easeci-website ansible_host=164.132.55.28  ansible_port=22
+
+# Mozemy uzywać rónych parametrów dla kazdego wpisu inventory
+# To tak zwane "behavioral inventory parameters" czyli np. ansible host, ansible_port czy ansible_password
+
+# Mozna takze definiować grupy grup, istnieje do tego dedykowana składnia
+# [grupa:children]
+# webservers
+
+# Jeśli mamy grupy serwerów, które są nazywane z kolejnymi numerami, etc.
+# Mozemy wymieniać wszystkie za pomocą takiego zapisu:
+[web] 
+web[01:20].staging.pl
+# Wówczas zostaną wyliczone serwery od 01 do 20
+# Działa to takze z literami

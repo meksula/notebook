@@ -20,3 +20,10 @@ Fajna możliwość to dodanie shebanga na początku playbooka, co pozwala na uru
 
 Pamiętaj, że interpolacja stringów, albo podstawianie zmiennej odbywa się jak w Angularze
 Zmienne zdefiniowane w sekcji 'vars' możemy rozwiązać za pomocą {{ nazwa_zmiennej }}
+
+
+* Inventory (ewidencja) to zbiór opisanych serwerów.
+
+* Jak chcemy wykonać polecenie na wszystkich serwerach zdefiniowanych w pliku inventory,
+  mozemy uzyc selektora 'all', wtedy ansible wykona polecenia na wszystkich hostach
+  $ ansible all -a "pwd"
