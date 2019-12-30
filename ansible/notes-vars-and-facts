@@ -1,0 +1,12 @@
+Zmienne do danego playbooka mozemy załadować z pliku!
+Zamiast 'vars', uzyj 'vars_files'
+
+vars_files:
+   - some_playbook.yml
+
+A ten plik some_playbook.yml moze wyglądać np. tak:
+
+key_file: /etc/nginx/ssl/nginx.key
+cert_file: /etc/nginx/ssl/nginx.crt 
+conf_file: /etc/nginx/sites-available/default 
+server_name: localhost

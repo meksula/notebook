@@ -1,0 +1,11 @@
+# W tym pliku o formacie YAML, definiujemy zmienne dla konkretnej grupy hostów
+db:
+  service:
+    dialect: postgresql
+    port: 5432
+    username: root
+    password: kemroc43cm0934mc
+
+# Będzie wtedy mozna się odnosić do zmiennych w taki sposób w jakimś playbooku:
+# {{ db_service_username }}
+

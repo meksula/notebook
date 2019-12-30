@@ -1,0 +1,13 @@
+- name: Debug example - variables display
+  hosts: webservers
+  become: True
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: Test
+      shell: pwd
+    - name: Show the value of output      #
+      debug: var=username                 # W taki sposób mozemy sobie podejrzec jaka zmienna się podstawiła
+    - name: Save value to variable        #
+      command: whoami                     #
+      register: remote_username           # W taki sposób mozemy zachować informacje z wywołania polecenia do zmiennej remote_username

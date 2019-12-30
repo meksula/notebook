@@ -20,8 +20,9 @@ easeci-website ansible_host=164.132.55.28  ansible_port=22
 # To tak zwane "behavioral inventory parameters" czyli np. ansible host, ansible_port czy ansible_password
 
 # Mozna takze definiować grupy grup, istnieje do tego dedykowana składnia
-# [grupa:children]
-# webservers
+# Pod nazwę 'grupa' mozemy sobie wstawic nazwę jaką chcemy
+[grupa:children]
+webservers
 
 # Jeśli mamy grupy serwerów, które są nazywane z kolejnymi numerami, etc.
 # Mozemy wymieniać wszystkie za pomocą takiego zapisu:
@@ -29,3 +30,24 @@ easeci-website ansible_host=164.132.55.28  ansible_port=22
 web[01:20].staging.pl
 # Wówczas zostaną wyliczone serwery od 01 do 20
 # Działa to takze z literami
+
+
+# Bardzo ciekawą i za pewne bardzo przydatną rzeczą jest ustawianie zmiennych przypisanych dla jakiejś grupy.
+# Jaki problem to rozwiązuje?
+# Np. jak mamy kilkanaście serwerów postgresql oraz rabbita, to kazda grupa kozysta z innego portu etc.
+# Aby zdefiniować zmienne dla grupy, wystarczy po dwukropku wstawić 'vars'
+[db]
+db[01:05].postgres.staging.lublin.pl
+# A teraz odnosimy się do wyzej zdefiniowanej grupy o nazwie 'db' i przypisujemy kilka zmiennych
+[db:vars]
+db_username=admin
+db_password=admin1234
+db_port=5432
+
+# Zwróć uwagę na dwa nowe katalogi:
+# host_vars  - umieszczać będziemy tutaj zmienne dla kazdego hosta z osobna
+# group_vars - tutaj mozemy umieszczać zmienne powiązane z daną grupą hostów
+# Dlaczego?
+# Wydzielamy specjalne katalogi na zmienne, poniewaz jeden plik inventory byłby zbyt długi i skomplikowany
+#
+# Następnie tworzymy pliki o nazwie takiej, jaką ma dana grupa w inventory

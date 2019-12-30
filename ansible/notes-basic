@@ -27,3 +27,13 @@ Zmienne zdefiniowane w sekcji 'vars' możemy rozwiązać za pomocą {{ nazwa_zmi
 * Jak chcemy wykonać polecenie na wszystkich serwerach zdefiniowanych w pliku inventory,
   mozemy uzyc selektora 'all', wtedy ansible wykona polecenia na wszystkich hostach
   $ ansible all -a "pwd"
+
+ Moduł add_host
+  Za pomocą wywołania tego modułu, mozemy dodac informacje o hoście dynamicznie
+  Moduł add_host dodaje wpis o serwerze tylko podczas wykonywania scenariusza. Nie modyfikuje pliku ewidencyjnego(inventory).
+
+Moduł group_by
+ Za pomocą wywołania tego modułu, mozemy dynamicznie tworzyc grupy hostów.
+ Kiedy jest to przydatne?
+  Na przykład wtedy gdy mamy zdefiniowane maszyny z róznymi OS. Wówczas mozemy sobie pogrupować hosty.
+  Do grupowania słuzą tak zwane 'fakty'. Wydaje mi się na ten moment, ze są to jakieś predefiniowane stałe wartości.
