@@ -1,0 +1,10 @@
+# Aby nadpisać zmienną message, uruchom ten playbook tak:
+# $ ansible-playbook var-override.yml -e message='Hello my Friend!'
+
+- name: Example of override variable in argument
+  hosts: webservers
+  vars:
+    message: Run playbook without argument!
+  tasks:
+    - name: Display message passed in argument
+      debug: msg="{{ message }}"

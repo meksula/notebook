@@ -10,4 +10,9 @@
       debug: var=username                 # W taki sposób mozemy sobie podejrzec jaka zmienna się podstawiła
     - name: Save value to variable        #
       command: whoami                     #
-      register: remote_username           # W taki sposób mozemy zachować informacje z wywołania polecenia do zmiennej remote_username
+      register: remote_username           # W taki sposób mozemy zachować informacje z wywołania polecenia do zmiennej      remote_username
+      ignore_errors: True                 # Jak wystąpi błąd, ansible nie zakończy playbooka, ale poleci dalej ignorując błędy
+    - name: Check new assigned value 
+      debug: var=remote_username          # Listujemy sobie zmienną, którą niedawno przypisaliśmy
+    - name: Check resolving vars
+      debug: msg="Logged by SSH as {{ remote_username.stdout }}"

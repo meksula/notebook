@@ -1,0 +1,11 @@
+# Prościutki playbook, który demonstruje jak działa zbieranie faktów
+# Gathering facts odpala się zawsze na początku playbooka
+
+- name: Check Linux distribution on our servers
+  hosts: webservers
+  gather_facts: True
+  tasks:
+    - name: Checking distro
+      debug: var=ansible_distribution
+    - name: List some embedded variables (predefined in Ansible)
+      debug: var=group_names

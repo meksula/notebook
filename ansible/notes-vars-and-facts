@@ -10,3 +10,44 @@ key_file: /etc/nginx/ssl/nginx.key
 cert_file: /etc/nginx/ssl/nginx.crt 
 conf_file: /etc/nginx/sites-available/default 
 server_name: localhost
+
+
+* Co to jest Fact w Ansible?
+Oprogramowanie Ansible podczas gromadzenia faktów łączy się z serwerem i odczytuje informacje o nim, 
+takie jak typ architektury procesora, adresy IP, informacje o systemie operacyjnym, pamięci i dyskach. 
+Dane te zapisuje w zmiennych zwanych faktami, z których korzysta się w taki sam sposób jak ze zwykłych zmiennych.
+
+* Jak mozemy wylistować wszystkie fakty na danym hoście? 
+  $ ansible jenkins -m setup
+  czyli:
+  $ ansible <nazwa_hosta> -m setup
+
+  Mozemy tez sprawdzić fakty filtrując je po danej grupie, np.
+  $ ansible jenkins -m setup -a "filter=ansible_eth*"
+
+  Polecenie takie wyświetli nam wszystkie informacje o interfejsach danego hosta.
+
+* Fakty lokalne na serwerze
+  Mozemy przechowywać zmienne takze na serwerach. Wystarszy dodać plik .yml, .json, albo .ini
+  i wrzucić go do katalogu /etc/ansible/facts.d/
+  Potem mozemy się odnosić do tak zapisanych zmiennych przez playbooka.
+  !!! Takie fakty zostaną zapisane pod nazwą zmiennej "ansible_local". Więc przez taki klucz 
+  słownika mozemy się dobierać do konkretnej zmiennej.
+  Następnie, kolejnym kluczem w zmiennej "ansible_local" będzie nazwa konkretnego pliku, w którym zapisaliśmy zmienne.
+  $ /etc/ansible/facts.d/variables.fact
+
+  Jak będziemy mieć plik taki jak powyzej, to mozemy z niego odczytać zmienną tak:
+  ansible_local.variables.some_var
+
+
+  * Jak wykonać playbook ze zmiennymi jako argument (tak jak skrypt bash)?
+  Za pomocą polecenia ansible-playbook -e var=value można uruchamiać scenariusz podobnie jak skrypt powłoki z parametrami. 
+  Parametr -e pozwala przekazywać w argumentach zmienne do scenariusza.
+   np. $ ansible-playbook some-playbook.yml -e username=karol
+  Dzięki takiemu nadpisaniu zmiennej mozemy sobie dynamicznie zmieniać wartości per jedno wykonanie playbooka
+  !!! Równie dobrze, mozesz przekazać cały plik zmiennych wykonując playbook:
+   np. $ ansible-playbook some-playbook.yml -e @some_vars.yml
+
+
+   $ ansible-playbook tls-enable.yml --list-tasks
+   Powyzszą komendą mozemy wylistować sobie wszystkie taski w danym playbooku
