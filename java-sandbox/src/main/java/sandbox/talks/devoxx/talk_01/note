@@ -1,0 +1,14 @@
+Title: Parallel and Asynchronous Programming with Streams and CompletableFuture by Venkat Subramaniam
+Link: https://www.youtube.com/watch?v=IwJ-SCfXoAU
+
+Martin Fowler "Collection pipeline pattern" - międzyinnymi, Java Stream API jest implementacją tego wzorca.
+
+You should never have more threads than cores you have!
+                                        Vencat Subramaniam
+
+Opcja dla JVM, określamy ile maksymalnie wątków będzie działało równolegle.
+Jak ustawimy na "0", to aplikacja będzie działać tylko na wątku "main".
+Każda liczba > 0 jest kolejnym wątkiem dopuszczalnym dla danego procesu.
+Trzeba bardzo uważać, stosując tą flagę.
+
+    -Djava.util.concurrent.ForkJoinPool.common.parallelism=10
