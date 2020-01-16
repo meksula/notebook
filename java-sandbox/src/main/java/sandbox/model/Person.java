@@ -9,11 +9,13 @@ import java.util.Random;
 @Getter
 public class Person {
     private static final Random random = new Random();
+    private static Long id = 0L;
     private LocalDateTime createLocalDate;
     private String firstName;
     private int age;
 
     public Person(String firstName) {
+        id = id ++;
         this.firstName = firstName;
         this.createLocalDate = LocalDateTime.now();
         this.age = random.nextInt(70);

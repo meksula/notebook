@@ -12,3 +12,28 @@ Każda liczba > 0 jest kolejnym wątkiem dopuszczalnym dla danego procesu.
 Trzeba bardzo uważać, stosując tą flagę.
 
     -Djava.util.concurrent.ForkJoinPool.common.parallelism=10
+
+
+CompletableFuture stosuje ten sam koncept co Promises w JavaScript
+CompletableFuture ma stages.
+Czym jest stage?
+ - Pipeline of execution
+ - Możemy przechodzić z jednej do kolejnej stage
+ - każdy, pojedyńczy Stage przyjmuje CompletableFuture i zwraca kolejny CompletableFuture
+
+
+ Jaka jest relacja między Stream a CompletableFuture?
+    * Oba obiekty de facto dostarczają nam `lazy pipeline` do przetwarzania informacji
+
+      Stream        |       CompletableFuture
+ 0, 1 or more       |   0 or 1
+ only data channel  |   data chanel and error channel
+ forEach()          |   thenAccept()
+ map()              |   map()
+
+ Każdy taki pipeline może znajdować się w jednym z trzech stanów:
+ - pending state
+ - resolved state
+ - rejected state
+
+ ! Nigdy nie rób niczego bez timeoutu! (nawet w prawdziwym życiu xD)
