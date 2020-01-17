@@ -17,7 +17,7 @@ public abstract class TimeMeasureDecorator {
                 System.out.println("===> Start method");
                 Stopwatch stopwatch = Stopwatch.createStarted();
                 runnable.run();
-                System.out.println("\n\n===> Ends with milliseconds: " + stopwatch.elapsed(TimeUnit.MILLISECONDS));
+                System.out.println("===> Ends with milliseconds: " + stopwatch.elapsed(TimeUnit.MICROSECONDS));
             }
         }.execute();
     }

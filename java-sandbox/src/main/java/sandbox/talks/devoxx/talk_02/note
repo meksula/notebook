@@ -1,0 +1,11 @@
+Title: The Power and Practicality of Immutability by Venkat Subramaniam
+Link: https://www.youtube.com/watch?v=FQERMVABRrQ
+
+Czym jest niemutowalność i jak się ona ma do Javy?
+
+- Obiekt raz utworzony, nie zmienia się! Nie ma setterów etc.
+- Możemy osiągnąć niemutowalność w Javie np. za pomocą programowania funkcyjnego,
+    w którym operujemy na 'czystych' funkcjach
+    - Czyste funkcje zawsze zwracają taki sam output dla podanych argumentów! Brak tak zwanego side-effect
+    - nie przypisujemy obiektów do zmiennych
+    - nie zależy od niczego co jest zmienne!
