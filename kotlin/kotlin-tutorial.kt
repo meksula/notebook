@@ -1,4 +1,3 @@
-
 // Można użyć takiego zapisu jak poniżej, żeby z kody Java można było
 // wywoływać funkcje tak: Tutorial.foo(), albo ze statycznego importu
 // // @file:JvmName("Tutorial")
@@ -7,7 +6,7 @@ package tutorial
 import java.io.IOException
 
 // // możemy używać idiomów, np. data oznacza, że ta klasa to będzie zwykłe DTO
-data class Person(val name: String, val age: Int) {
+data class Person(val name: String, var age: Int) {
     
     override fun toString(): String {
         val adult: String = "adult"
@@ -41,6 +40,20 @@ fun main() {
 
 	loopExample()
     rangeLoopExample()
+    
+//     extension function example
+    me.incrementAge()
+    
+//     w taki sposób możemy sprawdzić jaka klasa jest ładowana podczas działania JVM
+    println(aggregated.javaClass)
+     
+//      infix        object metoda argument
+    var multiplied = me multipleAge 2     
+    println(multiplied)
+    
+//     szybkie tworzenie obiektu Pair, wystarczy słowo 'to'
+	var currency = "PL" to "Złoty"   // daje nam to Pair<String, String>
+	println("Waluta w kraju ${currency.first} to ${currency.second}")
 }
 
 // Taka funkcja to jest 'top-level-function'
@@ -120,7 +133,39 @@ fun untilLoop() {
 @Throws(IOException::class)
 fun exceptionallyCall() {
     throw IOException()
-}  
+}
+
+
+// Extension functions - możemy dopisać sobie funkcję do już istniejącej klasy, bez dziedziczenia
+// Ciekawa rzecz, nie musimy już używać np. wzorca dekoratora
+// 
+// Wystarczy, że zadeklarujemy funkcję, podamy nazwę klasy i po kropce napiszemy sygnaturę metody
+fun Person.incrementAge(): Int {
+    this.age ++
+    return this.age
+}
+
+// infix pozwala się odwołać do funkcji bez używania kropki
+
+infix fun Person.multipleAge(n: Int): Int {
+    return this.age * n
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
