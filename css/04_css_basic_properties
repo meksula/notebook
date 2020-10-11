@@ -1,0 +1,21 @@
+Podstawowe właściwości i wartości w CSS
+
+Każda właściwość ma wartość domyślną, a także jest zdefiniowane czy dana wartość
+jest dziedziczona czy też nie. Można to sprawdzać w dokumentacjach.
+np.
+- background-color
+    - default-value = transparent
+    - inherited = false
+
+
+Marginesy
+
+div {
+  margin: 10px  15px   20px    25px;
+  //      top   right  bottom  left
+}
+Wartości zgodnie ze wskazówkami zegara od godziny 12:00
+
+Jeśli wpiszemy tylko 2 wartości:
+margin: 10px auto;
+to pierwsza będzie się odnosić do top-bottom, a druga do right-left

@@ -1,0 +1,41 @@
+Właściwość float pozwala 'opływać' dany element.
+Dzięki temu np. można ustawić obok siebie dwa elementy blokowe.
+
+Trzeba pamiętać o tym, że jeśli element dziecko, ma ustawione float,
+to element rodzic, nie wie jaką element z float ma wysokość. Ta wysokość
+jest ustawiona na zero.
+
+Jeśli chcemy, żeby element miał wysokość dostosowaną do dzieci (które mają float),
+może dać na rodzicu:
+   overflow: hidden;  lub  overflow: auto;
+Nie jest to jednak dobra rozwiązanie, bo może rozwalać strukturę strony.
+
+Innym, lepszym rozwiązaniem jest:
+   clear: both;   -> czyszczenie wszystkiego
+Kończy opływanie na danym elemencie.
+W tym celu często dajemy w HTMLu pusty element, któremu dajemy clear: both;
+I wtedy opływanie się kończy.
+
+Jeszcze innym, czystszym rozwiązaniem jest użycie pseudoelementu(tworzonego z poziomu CSS).
+Element stworzony przez pseudoelement jest zawsze domyślnie liniowy.
+
+div::before {   -> taki zapis stworzy nowy element w DOM, przed określonym elementem
+}
+
+div::after {   -> taki zapis stworzy nowy element w DOM, po określonym elemencie
+}
+
+Dzięki temu można sobie wyczyścić wartość:
+
+<ul class="clearfix">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+
+.clearfix::after {
+  content: "";        <- to musi być, żeby pseudoelement zaistniał w DOM
+  display: block;     <- musi też być blokowy, bo inaczej nie będzie widoczny
+  clear: both;
+}

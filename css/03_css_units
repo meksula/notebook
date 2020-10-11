@@ -1,0 +1,26 @@
+- px // pixels, wartość stała, bezwzględna jeśli chodzi o wielkość ekranu
+- em // jednostka względna, 1em = 100% wartości elementu nadrzędnego
+        np.
+        div {
+          width: 50px;
+        }
+        p {
+          width: 1em;    // zatem <p> umieszczone w <div> będzie miał 50px;
+        }
+
+- rem // jednostka względna, 1rem = 100% wartości jednostki nadrzędnej czyli <html>
+        np.
+         p {
+           font-size: 1rem;  // zatem <p> będzie miał czcionkę = 16px,
+         }                   // bo <html> ma tak domyślnie zdefiniowane
+
+- % (procenty) // jednostka względna, zawsze odnosi się do wielkości elementu nadrzędnego
+
+- vh // (viewport height) jednostka względna odnosząca się zawsze do wysokości okna urządzenia
+                          100vh = 100% wysokości naszego okna przeglądarki
+
+- vw // (viewport width) jednostka względna odnosząca się zawsze do szerokości okna urządzenia
+                          100vw = 100% szerokości okna przeglądarki
+
+
+- pamiętaj, że procenty wyrażają wielkość bez paska scrollowania, a vw/vw wlicza jego szerokość

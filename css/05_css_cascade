@@ -1,0 +1,9 @@
+Kaskadowość jest to termin, pod którym kryją się zasady, które określają, jakie własności
+zostaną uwzględnione dla danego elementu.
+
+specificity - określa sposób w jaki przeglądarka decyduje, które reguły zostaną użyte
+              dla danego elementu jeśli zachodzi konflikt selektorów.
+              - np. Użycie 'class' jest ważniejsze niż użycie selektora elementu
+
+inheritance - elementy zagnieżdżone dziedziczą właściwości po elementach nadrzędnych.
+              Czy dany element jest dziedziczony czy nie, możemy sprawdzić w dokumentacji.

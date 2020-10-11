@@ -1,0 +1,47 @@
+Niemal wszystkie tagi są domyślnie wyświetlane jako blokowe.
+
+display: block;
+
+Elementy liniowe:<a>, <b>, <em>, <i>, <img>, <span>, <strong>
+
+Kilka zasad:
+- elementy blokowe zawsze mają 100% szerokości rodzica.
+- wysokość jest :auto, czyli tyle ile potrzebują na swój content
+- elementy podrzędne rozszerzają nadrzędne
+- między <span> zawsze są przerwy (nie marginesy) domyślnie ustawione
+
+Model pudełkowy (box model)
+content > padding > border > border > margin
+
+div {
+  overflow: hidden;    -> ukrywa treść, która wychodzi poza kontener
+}
+
+Pamiętaj, że marginesy top i bottom zachodzą na siebie, pokrywają się.
+Jeżeli jeden element ma margin-too: 100px, a element pod nim ma margin-top: 100px,
+to łączna przestrzeń między nimi będzie równa 100px (nie sumują się)
+
+
+Dla wyświetlania elementów ustawiana jest zawsze właściwość:
+  box-sizing: content-box;
+Wynika z tej właściwości, że content w modelu pudełkowym jest określany przez
+właściwości height oraz width, nie jest brany pod uwagę padding i border.
+Jeśli ustawimy:
+  box-sizing: border-box;
+To dla właściwości height oraz width będą brane wartości z paddingiem oraz z border.
+Warto taką właściwość umieścić w początkowym resecie styli.
+Jeśli nie deklarujemy bezpośrednio właściwości width i hight,
+to nie będzie żadnej różnicy jaki box-sizing użyjemy.
+
+display:
+  none
+  inline
+  block
+  inline-block
+
+Wartość inline-block (np. <button>, <input>) jest połączeniem dwóch sposobów wyświetlania.
+Taki element ustawia się jak liniowy, ale mamy kontrolę nad jego wymiarami w przeciwieństwie
+do zwykłego elementu liniowego.
+
+! Jeśli chcemy zlikwidować wbudowany margines dla elementów inline-blok,
+musimy dla nadrzędnego elementu (rodzica), ustawić font-size: 0;

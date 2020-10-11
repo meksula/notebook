@@ -1,0 +1,41 @@
+Opisane selektory: https://www.w3schools.com/cssref/css_selectors.asp
+
+div p {             // weź wszystkie elementy <p>,
+ ...                // znajdujące się w <div> bez względu na zagnieżdżenie
+}
+
+div>p {             // weź wszystkie elementy <p>,
+ ...                // które są bezpośrednimi potomkami <div>
+}
+
+div+p {             // weź wszystkie elementy <p>,
+ ...                // które następują bezpośrednio po tagu <div>
+}
+
+ul~li {             // weź wszystkie elementy <li>,
+ ...                // które poprzedzone są przez tag <ul>
+}
+
+* {                 // weź każdy tag na stronie
+ ...
+}
+
+.one {              // weź wszystkie tagi z klasą "one"
+ ...
+}
+
+p.one {             // weź wszystkie tagi <p> z klasą "one"
+ ...
+}
+
+#one {              // weź element z id="one"
+ ...                // Tylko jeden element może mieć id o danej wartości!
+}
+
+div, p {            // weź wszystkie tagi <div> oraz <p>
+ ...
+}
+
+p.red.big {         // weź wszystkie tagi <p>, które posiadają
+ ...                // jednocześnie klasy "red" oraz "big"
+}

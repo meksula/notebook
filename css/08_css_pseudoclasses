@@ -1,0 +1,15 @@
+Oprócz zwykłych selektorów, mamy do dyspozycji bardziej zaawansowane mechanizmy.
+Na przykład taki mechanizm to pseudoklasy.
+
+.red.big {    -> taki zapis oznacza - weź elementy, które mają jednocześnie obie klasy
+}
+
+:hover
+:focus
+
+:first-child
+:last-child
+
+:nth-child(2)      -> odnieś regułę do co drugiego elementu
+:nth-last-child()  -> tak samo jak wyżej, ale od końca
+p:nth-of-type()    -> pomija inne elementy w zagnieżdżone i wybiera tylko te z podanym typem taga

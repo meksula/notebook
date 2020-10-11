@@ -1,0 +1,21 @@
+Zapis RGB
+
+color: rgb(0, 255, 255);
+           |   |    |
+           |   |    |
+           \   \     \
+            \   \     [blue]
+             \   analogicznie [green]
+          odpowiada za
+          'moc' wyświetlania
+          koloru czerwonego [red]
+
+
+Zapis szesnastkowy (hex)
+
+color: #aa5e2c
+
+Tutaj jest podobnie,
+ - znaki 'aa' odpowiadają za 'moc' wyświetlania koloru [red]
+ - -||- [green]
+ - -||- [blue]
