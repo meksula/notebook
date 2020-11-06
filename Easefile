@@ -1,0 +1,6 @@
+pipeline:
+  executor: auto
+  stage 'Print Hello World':
+     $bash '''
+         echo 'Hello World from EaseCI'
+     '''
