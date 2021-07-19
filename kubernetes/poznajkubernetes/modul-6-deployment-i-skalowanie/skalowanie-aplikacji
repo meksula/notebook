@@ -1,0 +1,51 @@
+Istnieją 3 możliwości skalowania aplikacji w k8s
+- imperatywnie
+- deklaratywnie
+- Horizontal Pod Autoscaler (HPA)
+
+# Przykład skalowania imperatywnego, wykonujemy komendę i nakazujemy Kubernetesowi zmianę ilości replik
+kubectl scale --replicas=3 -f format-transformer-deployment.yml
+
+  --record - użyj tej opcji, żeby zarejestrować komendę do historii rolloutów
+
+  $ kubectl rollout history deploy -n format-transformer-domain-apps format-transformer-deployment
+    - polecenie powyższe pokaże nam historię rewizji danego deploymentu w danym namespace
+  $ kubectl rollout history deploy --revision=1 -n format-transformer-domain-apps
+    - polecenie pokaże nam szczegóły danego rolloutu, pokaże templatkę z jakiej został/y utworzony/e Pod/y
+      Możemy sobie dzięki temu podejrzeć z jakiego obrazu został zbudowany Pod.
+
+# Jeśli chodzi o deklaratywne skalowanie, wystarczy że w pliku deploymentu, albo replicaset zmienimy liczbę w polu 'replicas'
+
+# HPA
+Metrics server zbiera informacje na temat wykorzystania zasobów przez wszystkie obiekty w klastrze.
+HPA musimy sobie stworzyć jak każdy inny obiekt w klastrze k8s.
+Używamy komendy imperatywnej:
+$ kubectl autoscale deployment
+    -n format-transformer-domain-apps
+    format-transformer-deployment
+    --cpu-percent=50
+    --min=1
+    --max=10
+    --name='format-transformer-hpa'
+--cpu-percent określa wartość zużycia procesora, jak zostanie przekroczona, to skalujemy w górę
+--min minimalna liczba podów
+--max maksymalna liczba podów
+
+# poniższe polecenie zbierze nam wszystkie HPA z danej przestrzeni nazw
+$ kubectl get horizontalpodautoscaler.autoscaling -n format-transformer-domain-apps
+
+
+-> manifest
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name:
+  namespace: format-transformer-domain-apps
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: format-transformer-deployment
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50

@@ -1,0 +1,8 @@
+# Możemy w ten sposób Sprawdzić prywatny adres IP kontenera dockera
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <nazwa/id kontenera>
+
+# Instaluje ping, nslookup etc.
+apt-get install -y dnsutils net-tools iputils-ping
+
+# Obserwuj polecenie co jedną sekundę
+watch -n 1 -t kubectl get pods -n format-transformer-domain-apps
