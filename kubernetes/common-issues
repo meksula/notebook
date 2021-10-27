@@ -6,3 +6,71 @@ apt-get install -y dnsutils net-tools iputils-ping
 
 # Obserwuj polecenie co jedną sekundę
 watch -n 1 -t kubectl get pods -n format-transformer-domain-apps
+
+# Z maszyny, z której chcemy przekopiować klucz publiczny SSH do innych maszyn
+# w celu uwierzytelnienia bez podawania hasła, możemy użyć
+  $ ssh-copy-id <nazwa usera>@<ip hosta, do którego kopiujemy klucz>
+
+# Jak zmienić typ już istniejącego serwisu?
+  $ kubectl patch svc argocd-server  -p '{"spec": {"type": "LoadBalancer"}}'
+
+
+
+# Stawia klaster rabbitmq w kubernetesie
+  $ kubectl apply -f "https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml"
+
+
+# Jak forwardować port serwisu do localhost?
+  $ kubectl port-forward service/format-transformer-service 8080:8080 -n ft-backend
+   - to polecenie weźmie serwis i wystawi port tego serwisu na porcie 8080 należącym do naszej maszyny
+
+
+# Odpal customowego poda do debugowania:
+  $ kubectl run -it --rm --restart=Never --image=meksula/diagnostics:v1.2 diagno
+
+
+# Jak debugować połączenia z konkretnego poda do jakiegoś serwisu lub jakiegoś zewnętrznego hosta?
+ 1. Do alpine linux można dodać pakiet:
+    $ apk add busybox-extras
+ 2. Następnie podłączmy się telnetem pod konkretny port naszego hosta ze zmiennej środowiskowej
+    $ telnet ${CACHE_HOST} 6379
+
+# Jak podejrzeć eventy tylko konkretnego poda?
+  $ kubectl get events -n ft-backend --field-selector involvedObject.name=format-transformer-persister-deployment-64797f788b-4fgh9
+
+# Redisa odpal tak:
+  $ docker run --name redis -v /myfirstredis/redis.conf:/usr/local/etc/redis/redis.conf -p 6379:6379 --expose=6379 -d redis redis-server --appendonly yes
+   (musi być expose port)
+
+# Jak nie można ubić kontenera dockera
+ $ sudo aa-remove-unknown
+
+# Pokaż IP poda w klastrze:
+ $ kubectl describe pod format-transformer-deployment-5f49bfff57-zlv8w -n ft-backend | grep 'IP:' | tail -n 1 | awk -F ' ' '{print $2}'
+ 
+# Postgres z podmapowanym woluminem danych
+ $ docker run -d \
+    --name postgres \
+    -p 5432:5432 \
+    -e POSTGRES_PASSWORD=password \
+    -e PGDATA=/var/lib/postgresql/data \
+    -v /home/karol/dev/database:/var/lib/postgresql/data \
+    postgres
+    
+    
+    eval "docker run --name ecommerce_gateway -d -p 9191:9191 \
+  --add-host fenige-dev-common-config-service-app-01.fenige.pl:10.22.10.158 \
+  --add-host fenige-dev-hsm-01.fenige.pl:10.22.10.117 \
+  --add-host fenige-discovery-docker.local:$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ecommerce_discovery) \
+  --env-file envs \
+  registry.fenige.pl/ecommerce_gateway:0.0.1-alpha"
+    
+    
+  # Przykład wewnętrznej nazwy dns dla serwisu:
+  ecommerce-discovery-service.ecommerce.svc.cluster.local
+  <service-name>.<namespace>.svc.cluster.local
+  
+  
+  # Uruchomienie Poda do debugu z interaktywną konsolą
+  $ kubectl run -i --tty -n commons monitoring-debug --image=registry.fenige.pl/monitoring:1.0.8 -- sh
+    

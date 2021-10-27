@@ -1,0 +1,94 @@
+[] (F) Podmapować wolumen na VM registry do kontenera
+
+[✘] Nauczyć się podstaw Ansible
+[✘] Stworzyć nowy projekt na githubie, który będzie przechowywał zasoby Ansible
+[✘] Napisać rolę Ansible, która za pomocą modułu kubectl zdeployuje nam ArgoCD na klaster k8s
+[] Zaznajomić się czy jest możliwość wgrania do ArgoCD od razu konfiguracji projektów (argo-root)
+
+[✔] Zaimplementować format-transformer-api-gateway, który będzie spinał pozostałe mikroserwisy
+   i będzie jako jedyny backendowy serwis wystawiony na zewnątrz
+[✔] Zaimplementować pobieranie 'stats' w format-transformer-panel
+[✔] Zaimplementować Redis do jednego z naszych serwisów format-transformer
+[] Health check, readiness oraz liveness probe dla wszystkich aplikacji (Spring dostarcza)
+
+[] Korzystając z Docker Hub, skonfigurować wersjonowanie obrazów aplikacji
+[] Postawić na klastrze k8s Jenkinsa, żeby móc budować nasze aplikacje
+   (podobnie jak z ArgoCD przez rolę Ansible)
+[] Zapoznać się z pluginem Docker do Jenkinsa, aby budował aplikacje
+   i wypychał obrazy do publicznego Docker Hub
+   (niestety, będzie trzeba triggerować build ręcznie, bo nie mamy wystawionego Jenkinsa na świat)
+[] Jenkins ma poprawnie tagować obrazy i ustawiać poprawnie wersję
+
+[✔] Stworzyć repozytorium, w którym będziemy przechowywać pliki manifestów k8s
+   dla projektu format-transformer, jeżeli jest taka opcja (podobno jest),
+   to trzymamy wszystkie pliki manifestu w jednym repo w takiej strukturze:
+   - format-transformer-k8s-resources
+      - format-transformer
+          - deployment.yml
+          - service.yml
+      - format-transformer-persister
+          - deployment.yml
+          - service.yml
+      - format-transformer-stats
+          - deployment.yml
+          - service.yml
+      - format-transformer-panel
+          - deployment.yml
+          - service.yml
+      - rabbitmq
+          ... (do zastanowienia jak to zrobić i czy to powinno być tutaj przechowywane)
+      - redis
+          ... (do zastanowienia jak to zrobić i czy to powinno być tutaj przechowywane)
+      - ingress (oddzielny zasób)
+[✔] Stworzyć te wszystkie projekty na ArgoCD, a jeśli się da to, żeby sobie dociągnął to z ymla konfiguracyjnego
+[] Do obiektów przydzielić zasoby
+[✔] Sprawdzić graficzne narzędzia do przeglądania stanu klastra np. lens
+
+[] Projekt Jib, czyli jak automatycznie generować Dockerfile i nie pisać ręcznie. Zapoznać się solidnie.
+[] Kustomize - co i jak + modyfikacja projektu format-transformer-k8s-resources,
+   aby dostosować go do używania zmiennych - powiązać to poprawnie z ArgoCD
+[] Nauczyć się jak korzystać z ArgoCD w podstawowym stopniu
+
+# Dodatkowo
+[] Próba odpalenia jakiegoś serwisu w pracy jako kontener Dockera
+[✔] Zastanowić się czy Gateway jest do wywalenia, albo jak on ma współgrać z Service Discovery kubernetesa
+[] Dorzucenie nowego profilu do Config Service jeżeli wszystko lokalnie zadziała
+[] Traefik - jak wizualizować ruch
+[] CoreDNS - zapoznać się lepiej
+[] Calico - sprawdzić
+[] Zbieranie logów - fluentd oraz elk, albo gdzie to wysyłać
+[] Service Mesh (np. Istio)
+
+
+# Priorytety, żeby było widać efekt pracy
+[] Rozpisać jakie problemy w migracji na Kubernetes napotkałem
+[] Żeby obronić powyższe, muszę skonteneryzować jakieś nasze aplikacje
+[✔] Rozdział 12. (książka Dockera)
+[✔] Dokręcić POC, w Redisie będziemy trzymać listę requestów, jakie przyszły do serwisów
+   - tylko jeden mikroserwis i panel jest wystawiony na świat
+   - DoD -> jednym słowem, chciałbym, aby to wszystko już działało prawilnie, żeby można było pokazać innym
+[] Postawić tego Jenkinsa, żeby jednak mi budował projekty z master branch, i dodawał wersję do obrazu oraz wrzucał na publiczne registry
+[✔] Na koniec narysować diagram środowiska format-transformer, aby łatwo można było je zrozumieć i zaprezentować
+[] Debugowanie wewnętrznej sieci kubernetesa - to na dzisiaj główny temat.
+   Przerobić skrupulatnie co mówi dokumentacja na temat debugowania: https://kubernetes.io/docs/tasks/debug-application-cluster/
+[✔] Napisać kompletną konfigurację dla format-transformer https://github.com/meksula/format-transformer-k8s-resources
+[✘] Zaimplementować Docker Compose do format-transformer, ma wstawać jedną komendą lokalne środowisko
+
+
+# Przygotowania do prezentacji
+ [] Napisanie tabeli z naszymi mikroserwisami, jakie mają zewnętrzne zależności
+ [] Sprawdzić jakiś system wersjonowania
+ [] Dokeryzacja naszych aplikacji, po kolei
+ [] Tworzenie podstawowej konfiguracji zasobów kubernetesa
+ [] Odpalić kontener do debugowania i sprawdzać po kolei zależności
+ [] docker-compose dla systemów w pracy
+ [] Skonfiguruj połączenie do Fenige Docker Registry (kubectl + lens)
+ [] Skonfiguruj połączenie do Fenige k8s Cluster (kubectl + lens)
+ [] Przeczytaj priorytetowo rozdział 17. w Kubernetes in action
+ [] 12 factor app - przeanalizować nasze aplikacje pod kątem tego manifestu
+ [] monitoring (prometheus) dla format-transformer
+ [] wizualizacja (grafana) dla format-transformer
+ [] scentralizowany system gromadzenia logów (loki) dla format-transformer
+ [] Health check, readiness oraz liveness probe dla wszystkich aplikacji format-transformer
+ [] monitoring klastra, żeby lens przedstawił statystyki
+ [] automatyczne budowanie obrazu bez pisania Dockerfile z palca

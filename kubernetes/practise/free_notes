@@ -1,0 +1,52 @@
+# uruchom frontend na nginx, przekaż port na 8080
+docker run --rm -p 8080:80 meksula/format-transformer-panel:v1.0.0-rc
+
+# nie zapomnij podorzucać do Deploymentów zmiennej środowiskowej SPRING_PROFILE_NAME=k8s
+
+
+==> API
+
+# format-transformer
+POST /api/v1/transformation
+GET  /api/v1/activity
+
+# format-transformer-persister
+GET /api/v1/stats    (internal-only)
+
+# format-transformer-stats
+GET /api/v1/stats
+
+
+# format-transformer-Gateway |   service expose
+POST /api/v1/transformation   -> format-transformer
+GET  /api/v1/activity         -> format-transformer
+GET  /api/v1/stats            -> format-transformer-stats
+
+ALTER TABLE transformation ALTER COLUMN encoded_data TYPE varchar(10000);
+
+
+
+my-release-redis-cluster.default.svc.cluster.local
+
+kubectl run -it --rm --restart=Never --image=infoblox/dnstools:latest dnstools
+
+production-rabbitmqcluster.default.svc.cluster.local
+
+
+
+Ingress:
+ - /api/**  ->  gateway
+ - /        ->  panel  (blank URI)
+
+
+ - name: DATABASE_HOST
+   valueFrom:
+     configMapKeyRef:
+       name: format-transformer-cm
+       key: database-host
+
+
+
+ecommerce-service.ecommerce.svc.cluster.local
+ecommerce-gateway-service.ecommerce.svc.cluster.local
+monitoring-service.commons.svc.cluster.local

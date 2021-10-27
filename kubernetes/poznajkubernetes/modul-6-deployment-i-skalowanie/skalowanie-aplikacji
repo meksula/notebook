@@ -35,6 +35,8 @@ $ kubectl autoscale deployment
 $ kubectl get horizontalpodautoscaler.autoscaling -n format-transformer-domain-apps
 
 
+! Można skalować naszą aplikację według innych parametrów np: requests-per-second
+
 -> manifest
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler

@@ -1,0 +1,3 @@
+It’s helpful for pointing HTTP routes to specific microservices inside the Kubernetes cluster.
+Ingress can be also configured to load balance traffic to your apps, terminate SSL, perform name-based virtual hosting,
+split traffic between different services, set service access rules, etc.
